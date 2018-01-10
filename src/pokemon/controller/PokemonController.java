@@ -9,6 +9,7 @@ import pokemon.model.MagiKarp;
 import pokemon.model.Rowlet;
 import pokemon.model.Squirtle;
 import pokemon.model.Totodile;
+import pokemon.view.PokemonFrame;
 
 public class PokemonController 
 {
@@ -18,8 +19,17 @@ public class PokemonController
 	//}
 	
 	private List<Pokemon> pokedex;
+	private PokemonFrame appFrame;
 	
-	public List<Pokemon> getPokedex()
+	public PokemonController() 
+	{
+		pokedex = new ArrayList<Pokemon>();
+		buildPokedex();
+		
+		appFrame = new PokemonFrame(this);
+	}
+	
+	private void buildPokedex()
 	{
 		pokedex.add(new Crobat());
 		pokedex.add(new Dartrix());
@@ -28,6 +38,12 @@ public class PokemonController
 		pokedex.add(new Squirtle());
 		pokedex.add(new Totodile());
 		
+		return pokedex;
+	 
+	}
+	
+	public List<Pokemon> getPokedex()
+	{
 		return pokedex;
 	}
 	
@@ -48,6 +64,7 @@ public class PokemonController
 	}
 	
 	public boolean isValidDouble(String input)
+
 	{
 		boolean valid = false;
 		try
@@ -62,4 +79,16 @@ public class PokemonController
 		
 		return valid;
 	}
+	
+	public String [] convertPokedex()
+	{
+		String [] names = new String [pokedex.size()];
+				
+		for (int index = 0; index< pokedex.size(); index++)
+		{
+			names[index] = pokedex.get(index).getName();
+		}
+		
+		return names;
+			}
 	}
