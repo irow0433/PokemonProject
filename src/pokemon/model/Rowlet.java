@@ -25,7 +25,7 @@ public class Rowlet extends Pokemon implements Flying
 	
 	protected void setup()
 	{
-		this.setAttacksPoints(245);
+		this.setAttackPoints(245);
 		this.setCanEvolve(true);
 		this.setEnhancementModifier(.89);
 		this.setHealthPoints(134);

@@ -41,7 +41,7 @@ public class Dartrix extends Rowlet
 	protected void setup()
 	{
 		super.setup();
-		this.setAttacksPoints(325);
+		this.setAttackPoints(325);
 	}
 
 }
