@@ -55,6 +55,7 @@ import pokemon.controller.PokemonController;
 		setupListeners();
 	})
 	
+	// pokemonPanel is the constructor because it is defining the class
 	public class PokemonPanel extends JPanel
 	{
 		private PokemonController appController;
@@ -98,6 +99,15 @@ import pokemon.controller.PokemonController;
 		attackField.setText(appController.getPokedex().get(index).getAttackPoints() + "");
 		healthField.setText(appController.getPokedex().get(index).getHealthPoints() + "");
 		modifierField.setText(appController.getPokedex().get(index).getHealthPoints() + "");
+		
+		//update thext areas
+		descriptionArea.setText(appController.getPokedex().get(index).toString());
+		typeArea.setText("");
+		
+		for (String current : appController.getPokedex().get(index).getPokemonTypes())
+		{
+			typeArea.append(current + "\n");
+		}
 	}
 	private void setupScrollPane()
 	{
@@ -163,7 +173,22 @@ import pokemon.controller.PokemonController;
 	
 	private void updateImage()
 	{
+		String path = "/poke ball";
+		String defaultName = "ultraball";
+		String name = pokedexDropdown.getSelectedItem().toString();
+		String extension = ".png";
+		ImageIcon pokemonIcon;
 		
+		try
+		{
+			pokemonIcon = new ImageIcon(getClass().getResource(path + name + extension));
+		}
+		catch (NullPointerException missingImgaeFile)
+		{
+			pokemonIcon = new ImageIcon(getClass().getResource(path + defaultName + extension));
+		}
+		
+		iconLabel.setIcon(pokemonIcon);
 	}
 	
 	private void updateTypepanels()
@@ -205,6 +230,7 @@ import pokemon.controller.PokemonController;
 			secondType.setBackground(Color.WHITE);
 		}
 	}
+				
 				
 	
 				

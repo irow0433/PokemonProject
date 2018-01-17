@@ -1,5 +1,7 @@
 package pokemon.model;
 
+import java.util.ArrayList;
+
 public abstract class Pokemon 
 {
 	private int healthPoints;
@@ -12,12 +14,48 @@ public abstract class Pokemon
 		this.healthPoints = healthPoints;
 	}
 
-	public int getAttacksPoints() {
+	public int getAttackPoints() {
 		return attacksPoints;
 	}
 
-	public void setAttacksPoints(int attacksPoints) {
+	public void setAttackPoints(int attacksPoints) {
 		this.attacksPoints = attacksPoints;
+	}
+	
+	//when there is an error look for spelling first!! keyboard doesn't work correctly!!
+	public String[] getPokemonTypes()
+	{
+		String [] types = null;
+		ArrayList<String> parentType = new ArrayList<String>();
+		Class<?> currentClass = this.getClass();
+		
+		while(currentClass.getSuperclass() != null)
+		{
+			Class<?> [] pokemonTypes = currentClass.getInterfaces();
+			types = new String[pokemonTypes.length];
+			
+			for(int index = 0; index < types.length; index++)
+			{
+				String currentInterface = pokemonTypes[index].getCanonicalName();
+				currentInterface = currentInterface.replace(this.getClass().getPackage().getName() + ".", "");
+				if(!parentType.contains(currentInterface))
+				{
+					parentType.add(currentInterface);
+				}
+			}
+			
+			currentClass = currentClass.getSuperclass();
+			
+		}
+		
+		types = new String[parentType.size()];
+		
+		for(int index = 0; index < parentType.size(); index++)
+		{
+			types[index] = parentType.get(index);
+		}
+		
+		return types;
 	}
 
 	public double getEnhancementModifier() {
